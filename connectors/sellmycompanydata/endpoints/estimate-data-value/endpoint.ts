@@ -1,4 +1,4 @@
-import { defineEndpoint } from "@shared/core";
+import { defineEndpoint, type Json } from "@shared/core";
 import { zEstimateDataValueArgs } from "./schema/inputs.ts";
 
 /**
@@ -58,18 +58,14 @@ export default defineEndpoint({
         // The server's next_step tells the agent to call request_offer, a
         // write this connector deliberately leaves out. Replace that one
         // field with the route that exists here; every other field passes
-        // through as the server sent it.
+        // through as the server sent it. The provider's lifecycle.start
+        // sends a non-object structuredContent to fromError, so it is an
+        // object here.
         fromResponse: ({ data, utils }) => {
             const structured = utils.json.get(
                 data.output,
                 "$.result.structuredContent",
-            );
-            if (
-                structured === null || typeof structured !== "object" ||
-                Array.isArray(structured)
-            ) {
-                return structured;
-            }
+            ) as Record<string, Json>;
             return {
                 ...structured,
                 next_step: "This connector cannot send an offer request: " +

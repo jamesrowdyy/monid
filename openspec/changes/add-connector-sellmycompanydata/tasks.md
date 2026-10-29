@@ -22,12 +22,14 @@
 
 - [x] 3.1 Four fixtures recorded 2026-10-29 from the public server (made-up
       figures, no personal data, no headers)
-- [x] 3.2 provider.test.ts: compiled shape (2 ids, url, headers, keyless,
-      FREE, shared envelope fns), zero estimate, recorded request bodies
-      equal the sent bodies, verbatim replays, the in-band refusal,
-      JSON-RPC / HTTP / malformed envelopes at zero usage, binding gates
-      with no upstream call, pinned egress for both tools, a non-JSON 500,
-      live run gated on `SELLMYCOMPANYDATA_LIVE=1`
+- [x] 3.2 provider.test.ts: the compiled shape, once per provider (2 ids,
+      url, headers, keyless, FREE, shared envelope fns)
+- [x] 3.3 One endpoint.test.ts per endpoint, helpers in test-support.ts:
+      zero estimate, recorded request bodies equal the sent bodies,
+      verbatim replays, provider errors at zero usage (the in-band refusal,
+      JSON-RPC / HTTP / malformed envelopes, a non-JSON 500), the schema
+      gate with passing near-twins (the checklist pins that it takes no
+      input), pinned egress, live runs gated on `SELLMYCOMPANYDATA_LIVE=1`
 
 ## 4. Verify
 
